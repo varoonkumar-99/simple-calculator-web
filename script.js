@@ -1,29 +1,26 @@
-const display = document.getElementById('display');
+function calculate(operator) {
+    let num1 = parseFloat(document.getElementById("num1").value);
+    let num2 = parseFloat(document.getElementById("num2").value);
+    let result;
 
-function appendToDisplay(input) {
-    display.value += input;
-}
-
-function clearDisplay() {
-    display.value = "";
-}
-
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
-}
-
-function calculateResult() {
-    try {
-        // Evaluate the string expression
-        // Using a Function constructor is safer than eval() for basic tasks
-        const result = eval(display.value);
-        
-        if (result === Infinity || isNaN(result)) {
-            display.value = "Error"; // Handles Division by Zero
-        } else {
-            display.value = result;
+    if (isNaN(num1) || isNaN(num2)) {
+        result = "Please enter valid numbers";
+    } else {
+        switch(operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                result = num2 === 0 ? "Cannot divide by zero" : num1 / num2;
+                break;
         }
-    } catch (error) {
-        display.value = "Error"; // Handles malformed expressions
     }
+
+    document.getElementById("result").innerText = "Result: " + result;
 }
